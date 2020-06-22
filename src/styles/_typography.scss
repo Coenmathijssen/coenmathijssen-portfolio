@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'circular';
+  src: url('../assets/fonts/CircularStd-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'cheltenham bold';
+  src: url('../assets/fonts/CheltenhamStdBold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'cheltenham light';
+  src: url('../assets/fonts/CheltenhamStdLight.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'cheltenham book';
+  src: url('../assets/fonts/CheltenhamStdBook.otf') format('opentype');
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'circular', arial, sans-serif;
+}
+
+p {
+  font-family: 'cheltenham bold'
+}
