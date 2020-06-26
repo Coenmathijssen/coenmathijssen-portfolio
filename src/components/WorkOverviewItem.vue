@@ -1,6 +1,6 @@
 <template>
   <div class="workItem">
-    <div class="container">
+    <div class="work-overview container">
       <h1 class="title"><span class="count">0{{index + 1}}.</span> {{work.title}}</h1>
       <div class="keywords">
         <p class="keyword" v-bind:key="keyword.id" v-for="keyword in work.keywords">
@@ -8,7 +8,7 @@
         </p>
       </div>
     </div>
-    <img class="content__img" src="https://images.pexels.com/photos/4328962/pexels-photo-4328962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="img1" />
+    <img :src="work.image" class="content__img" alt="img2"/>
   </div>
 </template>
 
@@ -25,7 +25,6 @@ export default {
   .workItem {
     position: relative;
     display: inline-block;
-    padding-top: 3em;
     overflow: hidden;
 
     .container {
@@ -37,7 +36,8 @@ export default {
       .title {
         display: inline-block;
         color: $white;
-        font-size: 4em;
+        font-size: 2.3em;
+        margin: 20px 0 0;
 
         .count {
           color: $red;
@@ -51,18 +51,10 @@ export default {
         font-family: 'cheltenham book', arial, sans-serif;
         font-size: 0.75em;
         opacity: 0.9;
+        margin: 0;
       }
     }
  }
-
- canvas {
-  display: block;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: -1;
-  pointer-events: none;
-}
 
 .link {
   cursor: pointer;

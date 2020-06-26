@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="animation-container">
     <div class="animation-logo">
         <div class="logo">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84.37 84.37" id="logo">
@@ -31,18 +31,19 @@
 </template>
 
 <script>
-import { TimelineMax } from 'gsap/all'
+import { TimelineMax, Power1 } from 'gsap/all'
 
 export default {
   mounted () {
     let tl = new TimelineMax()
     tl
-      .to('.logo', 0.5, { x: '-100px' }, 0.5, 'first')
-      .to('.author', 0.5, { x: '100px' }, 0.5, 'first')
+      .to('.logo', 0.5, { x: '-100px' }, 0.8, 'first')
+      .to('.author', 0.5, { x: '100px' }, 0.8, 'first')
       .to('.animation-logo', 0.8, { y: '-40vh' }, 1.5)
       .from('.letters', { duration: 0.1, x: '100px', opacity: 0, stagger: 0.1 }, 2)
       .to('.second-text', { opacity: 1 }, 2.5)
       .to('.second-text', 6, { x: '-200%' }, 3)
+      .to('.animation-container', 1.5, { x: '-100%', ease: Power1.easeIn }, 5.5)
   },
   name: 'introAnimation'
 }
@@ -52,12 +53,15 @@ export default {
 <style lang="scss" scoped>
 @import '../styles/_main.scss';
 
-.container {
-  position: relative;
+.animation-container {
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   background-color: $white;
+  z-index: 9999;
 }
 
 .animation-logo {
@@ -86,6 +90,7 @@ export default {
   }
 
   p {
+    margin: 0;
     position: absolute;
     font-family: 'circular', arial, sans-serif;
     color: $black;
