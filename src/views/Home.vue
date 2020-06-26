@@ -3,7 +3,7 @@
     <div class="page-container" id="name">
       <div class="text">
         <div id="name-container">
-          <div class="link">
+          <div class="image-appear link">
             <h1>Hi. I'm <span class="stroke">Coen Mathijssen</span>,</h1>
             <img src="@/assets/img/myself.jpg" class="content__img" alt="photo of me">
           </div>
@@ -197,7 +197,7 @@ export default {
       
     //     get itemsElements() {
     //       // convert NodeList to Array
-    //       const items = [...this.itemsWrapper.querySelectorAll('.link')]
+    //       const items = [...this.itemsWrapper.querySelectorAll('.image-appear')]
       
     //       //create Array of items including element, image and index
     //       return items.map((item, index) => ({

@@ -1,25 +1,28 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">about</router-link>
-      <router-link to="/works">works</router-link>
+      <router-link to="/" class="link">Home</router-link>
+      <router-link to="/about" class="link">about</router-link>
+      <router-link to="/works" class="link">works</router-link>
     </div>
     <router-view/>
     <noise />
     <!-- <introAnimation /> -->
+    <customCursor />
   </div>
 </template>
 
 <script>
 // import introAnimation from '@/components/introAnimation.vue'
 import noise from '@/components/noise.vue'
+import customCursor from '@/components/customCursor.vue'
 
 export default {
   name: 'App',
   components: {
     // introAnimation,
-    noise
+    noise,
+    customCursor
   }
 }
 </script>
@@ -64,5 +67,14 @@ canvas {
 
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
+}
+
+body, * {
+	cursor: none;
+}
+
+::selection {
+  color: $white;
+  background: $red;
 }
 </style>

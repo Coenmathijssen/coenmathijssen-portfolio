@@ -3,13 +3,13 @@
     <div class="page-container">
       <div id="work-container">
         <div>
-          <div class="work link" v-bind:key="work.id" v-for="(work, index) in works.slice(0, 4)">
+          <div class="work image-appear" v-bind:key="work.id" v-for="(work, index) in works.slice(0, 4)">
             <workItem v-bind:work="work" v-bind:index="index"/>
             <div class="line"></div>
           </div>
         </div>
         <div>
-          <div class="work link" v-bind:key="work.id" v-for="(work, index) in works.slice(4, 8)">
+          <div class="work image-appear" v-bind:key="work.id" v-for="(work, index) in works.slice(4, 8)">
             <workItem v-bind:work="work" v-bind:index="(index + 4)"/>
             <div class="line"></div>
           </div>
@@ -212,7 +212,7 @@ export default {
       
     //     get itemsElements() {
     //       // convert NodeList to Array
-    //       const items = [...this.itemsWrapper.querySelectorAll('.link')]
+    //       const items = [...this.itemsWrapper.querySelectorAll('.image-appear')]
       
     //       //create Array of items including element, image and index
     //       return items.map((item, index) => ({
