@@ -8,21 +8,19 @@
     <router-view/>
     <noise />
     <!-- <introAnimation /> -->
-    <customCursor />
   </div>
 </template>
 
 <script>
 // import introAnimation from '@/components/introAnimation.vue'
 import noise from '@/components/noise.vue'
-import customCursor from '@/components/customCursor.vue'
+
 
 export default {
   name: 'App',
   components: {
     // introAnimation,
-    noise,
-    customCursor
+    noise
   }
 }
 </script>

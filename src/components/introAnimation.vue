@@ -34,6 +34,7 @@
 import { TimelineMax, Power1 } from 'gsap/all'
 
 export default {
+name: 'introAnimation',
   mounted () {
     let tl = new TimelineMax()
     tl
@@ -44,8 +45,7 @@ export default {
       .to('.second-text', { opacity: 1 }, 2.5)
       .to('.second-text', 6, { x: '-200%' }, 3)
       .to('.animation-container', 1.5, { x: '-100%', ease: Power1.easeIn }, 5.5)
-  },
-  name: 'introAnimation'
+  }
 }
 </script>
 

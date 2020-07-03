@@ -85,6 +85,7 @@ export default {
     pointer-events: none;
     z-index: 10000;
     transform: scale(1);
+    mix-blend-mode: exclusion;
 
     &.active {
         opacity: 1;
@@ -103,25 +104,21 @@ export default {
 
 .cursor-follower {
     position: fixed;
-    border:1px solid $white;
+    border: 1px solid $red;
     width: 30px;
     height: 30px;
     border-radius: 100%;
     z-index: 1;
-    transition: 0.4s cubic-bezier(0.75, -1.27, 0.3, 2.33) transform,
-        0.2s cubic-bezier(0.75, -0.27, 0.3, 1.33) opacity, 0.2s cubic-bezier(0.75, -0.27, 0.3, 1.33) background;
+    transition: 
+        0.4s cubic-bezier(0.75, -1.27, 0.3, 2.33) transform,
+        0.2s cubic-bezier(0.75, -0.27, 0.3, 1.33) opacity, 
+        0.2s cubic-bezier(0.75, -0.27, 0.3, 1.33) background,
+        0.4s cubic-bezier(0.75, -0.27, 0.3, 1.33) border;
     user-select: none;
     pointer-events: none;
     z-index: 10000;
     transform: translate(2px, 2px);
-    background: $white;
-    mix-blend-mode: exclusion;
-    //overflow: hidden;
-
-    // &.active {
-    //     opacity: 1;
-    //     transform: scale(3);
-    // }
+    background: none;
 
     &.menu-active {
         opacity: 1;
@@ -137,6 +134,9 @@ export default {
         margin:0 auto;
         border-radius: 52% 48% 70% 30% / 41% 47% 53% 59%;
         animation:bubble 7s ease-in-out infinite;
+        background: $white;
+        border: 1px solid $white;
+        mix-blend-mode: exclusion;
     }
 }
 

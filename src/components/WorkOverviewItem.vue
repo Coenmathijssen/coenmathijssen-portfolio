@@ -56,11 +56,11 @@ export default {
     }
  }
 
-.link {
+.image-appear {
   cursor: pointer;
 }
 
-.link img {
+.image-appear img {
   display: none;
 }
 
