@@ -85,8 +85,8 @@
 <script>
 import { TimelineMax, TweenMax } from 'gsap/all'
 import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap'
-import "../../node_modules/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap"
 import ScrollMagic from 'scrollmagic'
+import "../../node_modules/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap"
 
 export default {
   name: 'About',
