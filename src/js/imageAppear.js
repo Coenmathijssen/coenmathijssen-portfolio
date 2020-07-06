@@ -370,4 +370,4 @@ let animation = {
     }
 }
 
-export default test
+export default animation

@@ -38,18 +38,19 @@ name: 'introAnimation',
   mounted () {
     let tl = new TimelineMax()
     tl
-      .to('.logo', 0.5, { x: '-100px' }, 0.8, 'first')
+      .to('body', { height: '100vh', overflow: 'hidden' })
+      .to('.logo', 0.5, { x: '-100px'}, 0.8, 'first')
       .to('.author', 0.5, { x: '100px' }, 0.8, 'first')
       .to('.animation-logo', 0.8, { y: '-40vh' }, 1.5)
       .from('.letters', { duration: 0.1, x: '100px', opacity: 0, stagger: 0.1 }, 2)
       .to('.second-text', { opacity: 1 }, 2.5)
+      .to('body', { delay: 4, height: 'auto', overflow: 'auto' })
       .to('.second-text', 6, { x: '-200%' }, 3)
       .to('.animation-container', 1.5, { x: '-100%', ease: Power1.easeIn }, 5.5)
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import '../styles/_main.scss';
 
@@ -127,6 +128,24 @@ name: 'introAnimation',
       color: $white;
       opacity: 0;
       left: 135%;
+    }
+  }
+
+  @media all and (max-width: 981px) {
+    h1 {
+      font-size: 10em;
+    }
+  }
+
+  @media all and (max-width: 650px) {
+    h1 {
+      font-size: 8em;
+    }
+  }
+
+  @media all and (max-width: 550px) {
+    h1 {
+      font-size: 6em;
     }
   }
 }

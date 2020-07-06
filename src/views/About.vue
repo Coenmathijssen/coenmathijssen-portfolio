@@ -3,12 +3,12 @@
     <div class="page-container">
       <section class="intro-text">
         <div class="text-container">
-          <p>
+          <p class="animate">
             Hi, I’m Coen Mathijssen. A 22 year old Creative Front-end Developer based in Amsterdam. I like to combine design and development to create a complete digital experience. Currently I’m in my last year of my study Communication and Multimedia Design on the Hogeschool van Amsterdam.
           </p>
         </div>
       </section>
-      <section class="marquee-container">
+      <section class="marquee-container animate">
         <div class="photo">
           <div class="marquee">
             <p class="link">
@@ -37,7 +37,7 @@
         </div>
       </section>
       <section class="second-text">
-        <div class="text-container">
+        <div class="text-container animate">
           <p>
             I’m an enthusiastic and social dude who loves to drink beer, while still maintaining the reputation of being a lowkey nerd. For starters, I’m an absolute news junky. Secondly, I like to constantly find out new techniques to implement into a unique experience, both as an entrepreneur and in my free time.
           </p>
@@ -56,7 +56,7 @@
               <g>
                 <use xlink:href="#circlePath" fill="none"/>
                 <text>
-                  <textPath xlink:href="#circlePath">Check out my <a href="#" class="link">Currilum Vitae</a> - <a href="#" class="link">GitHub</a> - <a href="#" class="link">Linkedin</a></textPath>
+                  <textPath xlink:href="#circlePath">Check out my <a href="./img/cv.jpg" class="link" target="_blank" rel="noopener noreferrer">Currilum Vitae</a> - <a href="https://github.com/Coenmathijssen" class="link" target="_blank" rel="noopener noreferrer">GitHub</a> - <a href="https://www.linkedin.com/in/coen-mathijssen-4a50b417b/" class="link" target="_blank" rel="noopener noreferrer">Linkedin</a></textPath>
                 </text>
               </g>
           </svg>
@@ -68,23 +68,21 @@
               <g>
                 <use xlink:href="#circlePath" fill="none"/>
                 <text>
-                  <textPath xlink:href="#circlePath">Or just <a href="#" class="link">send</a> me an <a href="#" class="link">Email</a></textPath>
+                  <textPath xlink:href="#circlePath">Or just <a href="mailto:mathijssen.coen@gmail.com" class="link">send</a> me an <a href="mailto:mathijssen.coen@gmail.com" class="link" target="_blank" rel="noopener noreferrer">Email</a></textPath>
                 </text>
               </g>
           </svg>
         </div>
       </section>
-      <section class="email-container">
+      <section class="email-container animate">
         <p>Coffee is my fuel. Want to drink one together?</p>
-        <h1><a href="#" class="link">mathijssen.coen@gmail.com</a></h1>
+        <h1><a href="mailto:mathijssen.coen@gmail.com" class="link" target="_blank" rel="noopener noreferrer">mathijssen.coen@gmail.com</a></h1>
       </section>
     </div>
-    <customCursor />
   </div>
 </template>
 
 <script>
-import customCursor from '@/components/customCursor.vue'
 import { TimelineMax, TweenMax } from 'gsap/all'
 import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap'
 import "../../node_modules/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap"
@@ -92,15 +90,30 @@ import ScrollMagic from 'scrollmagic'
 
 export default {
   name: 'About',
-  components: {
-    customCursor
-  },
   mounted() {
+    // Animate elements inside viewport
+    if(!this.isMobile()) {
+      const controller = new ScrollMagic.Controller({})
+      const elements = Array.from(document.getElementsByClassName('animate'))
+
+      elements.forEach(element => {
+        console.log('joe:', element)
+          const tween = TweenMax.from(element, 1, { opacity: 0, y: 20 })
+                      
+          const sceneElements = new ScrollMagic.Scene({
+                  triggerElement: element,
+                  triggerHook: .7,
+              })
+              .setTween(tween)
+              .addTo(controller)
+      })
+    }
+
+    // Spinning text
     const circleTextController = new ScrollMagic.Controller({})
+    const tlCircle = new TimelineMax({})
 
-    const tl = new TimelineMax({})
-
-    tl
+    tlCircle
       .fromTo('#circle-outer', { rotate: -40 }, { rotate: 20 }, 'first')
       .fromTo('#circle-inner', { rotate: 20 }, { rotate: -40 }, 'first')
 
@@ -109,8 +122,31 @@ export default {
       duration: '200%',
       offset: -100
     }) 
-    .setTween(tl)
+    .setTween(tlCircle)
     .addTo(circleTextController)
+
+    // CURSOR
+        const cursor = document.getElementsByClassName('cursor')[0],
+        follower = document.getElementsByClassName('cursor-follower')[0]
+
+        let links = document.getElementsByClassName('link')
+        links = Array.from(links)
+
+        links.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                cursor.classList.add('active')
+                follower.classList.add('active')
+            })
+            link.addEventListener('mouseleave', function() {
+                cursor.classList.remove('active')
+                follower.classList.remove('active')
+            })
+        })
+  },
+  methods: {
+    isMobile: function() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
   }
 }
 </script>
@@ -133,6 +169,19 @@ export default {
     line-height: 1.8em;
     font-weight: 300;
   }
+
+   @media all and (max-width: 981px) {
+     padding: 15vh 10vh;
+
+     p {
+       font-size: 1em;
+     }
+   }
+
+   @media all and (max-width: 650px) {
+     padding: 15vh 1em;
+     max-width: 100%;
+   }
 }
 
 .marquee-container {
@@ -140,6 +189,18 @@ export default {
   width: 100%;
   max-width: 800px;
   margin: auto;
+
+  @media all and (max-width: 981px) {
+    max-width: 100%;
+    padding: 0 4em;
+    width: calc(100% - 8em);
+  }
+
+   @media all and (max-width: 650px) {
+    max-width: 100%;
+    padding: 0 2em;
+    width: calc(100% - 4em);
+   }
 
   .marquee {
     display: block;
@@ -169,7 +230,7 @@ export default {
     }
 
     p span {
-      // animation: infinite-moving-text 25s linear infinite;
+      animation: infinite-moving-text 25s linear infinite;
       z-index: 1;
     }
 
@@ -200,7 +261,7 @@ export default {
     position: relative;
     min-height: 500px;
     margin: auto;
-    background-image: url('../assets/img/myself-third.jpg'); 
+    background-image: url('../assets/img/myself.jpg'); 
     background-position: center;
     background-size: cover;
     overflow: hidden;
@@ -242,9 +303,10 @@ export default {
 .second-text {
   display: flex;
   justify-content: flex-end;
+  padding-bottom: 10vh;
 
   .text-container {
-    padding: 20vh 15vh;
+    padding: 25vh 15vh 20vh;
     max-width: 500px;
   }
 
@@ -263,6 +325,34 @@ export default {
       margin-top: 1em;
     }
   }
+
+  @media all and (max-width: 981px) {
+    display: block;
+    padding-bottom: 0;
+
+    .text-container {
+     padding: 20vh 10vh;
+     max-width: 100%;
+
+     p {
+       font-size: 1em;
+       line-height: 1.8em;
+     }
+    }
+  }
+
+  @media all and (max-width: 650px) {
+    .text-container {
+      padding: 15vh 1em;
+      max-width: 100%;
+    }
+  }
+
+   @media all and (max-width: 600px) {
+     .text-container {
+       padding: 15vh 1em 0;
+     }
+   }
 }
 
 #circle-container { 
@@ -322,6 +412,14 @@ export default {
       }
     }
   }
+
+  @media all and (max-width: 600px) {
+    height: 65vh;
+
+    & svg {
+      height: 65vh;
+    }
+  }
 }
 
 
@@ -335,7 +433,7 @@ export default {
 }
 
 .email-container {
-  padding: 50vh 0 20vh;
+  padding: 30vh 0;
 
   h1 {
     font-size: 4em;
@@ -389,6 +487,36 @@ export default {
     color: $white;
     text-align: center;
     margin-bottom: 1em;
+  }
+
+  @media all and (max-width: 981px) {
+    padding: 20vh 0;
+
+    p {
+      font-size: 1em;
+    }
+
+    h1 {
+      font-size: 3em;
+    }
+  }
+
+  @media all and (max-width: 700px) {
+    h1 {
+      font-size: 2em;
+
+      a::before, a::after {
+        height: 3px;
+      }
+    }
+  }
+
+  @media all and (max-width: 600px) {
+    padding: 5vh 0 10vh;
+
+    h1 {
+      font-size: 1.5em;
+    }
   }
 }
 </style>

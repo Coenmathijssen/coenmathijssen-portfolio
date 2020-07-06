@@ -1,26 +1,47 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/" class="link">Home</router-link>
-      <router-link to="/about" class="link">about</router-link>
-      <router-link to="/works" class="link">works</router-link>
-    </div>
+    <navigation v-bind:navigationItems="navigationItems"/>
     <router-view/>
     <noise />
-    <!-- <introAnimation /> -->
+    <introAnimation />
+    <customCursor />
   </div>
 </template>
 
 <script>
-// import introAnimation from '@/components/introAnimation.vue'
+import introAnimation from '@/components/introAnimation.vue'
+import customCursor from '@/components/customCursor.vue'
 import noise from '@/components/noise.vue'
-
+import navigation from '@/components/navigation.vue'
 
 export default {
   name: 'App',
   components: {
-    // introAnimation,
-    noise
+    navigation,
+    introAnimation,
+    noise,
+    customCursor
+  },
+  data () {
+    return {
+      navigationItems: [
+        {
+          id: 1,
+          name: 'Home', 
+          link: '/'
+        },
+        {
+          id: 2,
+          name: 'Works', 
+          link: '/works'
+        },
+        {
+          id: 3,
+          name: 'About', 
+          link: '/about'
+        }
+      ]
+    }
   }
 }
 </script>
@@ -31,6 +52,7 @@ export default {
 #app {
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
 }
 
 body {
@@ -50,7 +72,12 @@ body {
   padding: 0 2em;
   max-width: 1280px;
   margin: 0 auto;
-  min-height: 100vh;
+  min-height: 80vh;
+
+   @media all and (max-width: 500px) {
+     padding: 0 1em;
+     min-height: 60vh;
+   }
 }
 
 canvas {

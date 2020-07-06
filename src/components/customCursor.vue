@@ -11,64 +11,69 @@ import { TweenMax } from 'gsap/all'
 export default {
     name: 'customCursor',
     mounted() {
-        // CURSOR
-        const cursor = document.getElementsByClassName('cursor')[0],
-        follower = document.getElementsByClassName('cursor-follower')[0]
+        if(!this.isMobile()) {
+            // CURSOR
+            const cursor = document.getElementsByClassName('cursor')[0],
+            follower = document.getElementsByClassName('cursor-follower')[0]
 
-        console.log(cursor, follower)
+            let posX = 0,
+                posY = 0
 
-        let posX = 0,
-            posY = 0
+            let mouseX = 0,
+                mouseY = 0
 
-        let mouseX = 0,
-            mouseY = 0
+            TweenMax.to({}, 0.020, {
+            repeat: -1,
+            onRepeat: function() {
+                posX += (mouseX - posX) / 9;
+                posY += (mouseY - posY) / 9;
 
-        TweenMax.to({}, 0.020, {
-        repeat: -1,
-        onRepeat: function() {
-            posX += (mouseX - posX) / 9;
-            posY += (mouseY - posY) / 9;
+                TweenMax.set(follower, {
+                    css: {
+                    left: posX - 12,
+                    top: posY - 12
+                    }
+                })
 
-            TweenMax.set(follower, {
-                css: {
-                left: posX - 12,
-                top: posY - 12
-                }
+                TweenMax.set(cursor, {
+                    css: {
+                    left: mouseX,
+                    top: mouseY
+                    }
+                })
+            }
             })
 
-            TweenMax.set(cursor, {
-                css: {
-                left: mouseX,
-                top: mouseY
-                }
+            document.addEventListener('mousemove', function(e) {
+                mouseX = e.clientX
+                mouseY = e.clientY
+            })
+
+            let links = document.getElementsByClassName('link')
+            links = Array.from(links)
+
+            links.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    console.log('running')
+                    cursor.classList.add('active')
+                    follower.classList.add('active')
+                })
+                link.addEventListener('mouseleave', function() {
+                    cursor.classList.remove('active')
+                    follower.classList.remove('active')
+                })
             })
         }
-        })
-
-        document.addEventListener('mousemove', function(e) {
-            mouseX = e.clientX
-            mouseY = e.clientY
-        })
-
-        let links = document.getElementsByClassName('link')
-        links = Array.from(links)
-
-        links.forEach(link => {
-            link.addEventListener('mouseenter', function() {
-                console.log('running')
-                cursor.classList.add('active')
-                follower.classList.add('active')
-            })
-            link.addEventListener('mouseleave', function() {
-                cursor.classList.remove('active')
-                follower.classList.remove('active')
-            })
-        })
+    },
+    methods: {
+        isMobile: function() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
     }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../styles/_colors.scss';
 
 // CURSOR
@@ -138,6 +143,11 @@ export default {
         border: 1px solid $white;
         mix-blend-mode: exclusion;
     }
+
+    &.hide {
+        transform: scale(0);
+        margin:0 auto;
+    }
 }
 
 @keyframes bubble {
@@ -147,6 +157,12 @@ export default {
     60% { border-radius: 38% 62% 63% 37% / 33% 36% 64% 67%; }
     80% { border-radius: 61% 39% 51% 49% / 53% 62% 38% 47%; }
     100% { border-radius: 47% 53% 66% 34% / 48% 39% 61% 52%; }
+}
+
+@media (pointer:none), (pointer:coarse) {
+    .cursor, .cursor-follower {
+        visibility: hidden;
+    }
 }
 
 </style>

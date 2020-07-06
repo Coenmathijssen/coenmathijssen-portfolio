@@ -3,7 +3,7 @@
     <div class="work-overview container">
       <h1 class="title"><span class="count">0{{index + 1}}.</span> {{work.title}}</h1>
       <div class="keywords">
-        <p class="keyword" v-bind:key="keyword.id" v-for="keyword in work.keywords">
+        <p class="keyword" :key="keyword.id" v-for="keyword in work.keywords">
           {{keyword}}
         </p>
       </div>
@@ -53,6 +53,40 @@ export default {
         opacity: 0.9;
         margin: 0;
       }
+    }
+
+    @media all and (max-width: 1265px) {
+      .container .title {
+        margin: 30px 0 0;
+      }
+
+      .keywords {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+
+    @media all and (max-width: 1020px) {
+      .container .title {
+        font-size: 2em;
+      }
+    }
+
+     @media all and (max-width: 900px) {
+      .container .title {
+        font-size: 1.5em;
+      }
+    }
+
+    @media all and (max-width: 704px) {
+      .container .title {
+        font-size: 1.5em;
+      }
+      
+       .keywords {
+         position: relative;
+       }
     }
  }
 

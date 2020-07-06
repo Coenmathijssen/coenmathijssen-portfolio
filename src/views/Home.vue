@@ -2,30 +2,31 @@
   <section id="home">
     <div class="page-container" id="name">
       <div class="text">
-        <div id="name-container">
-          <div class="image-appear link">
-            <h1>Hi. I'm <span class="stroke">Coen Mathijssen</span>,</h1>
-            <img src="@/assets/img/myself.jpg" class="content__img" alt="photo of me">
-          </div>
-        </div>
-        <h2>A creative frontend developer</h2>
-        <h3>with a passion for design</h3>
+        <h1 id="first-text">Hi. I'm <span class="stroke">Coen Mathijssen</span>,</h1>
+        <h2 id="second-text">A creative frontend developer</h2>
+        <h3 id="third-text">with a passion for design</h3>
       </div>
     </div>
-    <customCursor />
+    <!-- <customCursor /> -->
   </section>
 </template>
 
 <script>
-import customCursor from '@/components/customCursor.vue'
-import { TweenLite } from 'gsap/all'
+// import customCursor from '@/components/customCursor.vue'
+import { TimelineMax } from 'gsap/all'
 
 export default {
   name: 'Home',
   components: {
-    customCursor
+    // customCursor
   },
   mounted () {
+    const tl = new TimelineMax()
+
+    tl
+      .from('#first-text', 0.8, { x: -50, opacity: 0 }, 'first')
+      .from('#second-text', 0.8, { x: 50, opacity: 0 }, 'first')
+      .from('#third-text', 0.8, { x: -50, opacity: 0 }, 'first')
   }
 }
 </script>
@@ -46,10 +47,24 @@ export default {
   }
 
   h1, h2, h3 {
+    margin: 50px 0;
     font-size: 4em;
     color: $white;
     text-align: center;
-    margin: 50px 0;
+    opacity: 1;
+  }
+
+  @media all and (max-width: 981px) {
+    h1, h2, h3 {
+      font-size: 3em;
+    }
+  }
+
+  @media all and (max-width: 620px) {
+    h1, h2, h3 {
+      margin: 30px 0;
+      font-size: 2em;
+    }
   }
 
   .stroke {
@@ -73,7 +88,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 80vh;
   }
 
   #name img {
